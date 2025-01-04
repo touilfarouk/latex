@@ -8,6 +8,7 @@
     <link rel="icon" href="icon.png">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@0.4.1/dist/html2canvas.min.js"></script>
     <title>Application KaTeX</title>
     <style>
         body {
@@ -70,8 +71,8 @@
        
         <div id="output" class="output"></div>
         <canvas id="canvas" style="display:none;"></canvas>
-          <br>
-         <button style="float:right; background-color:green" onclick="exportToPNG()">Exporter en PNG</button>
+        <br>
+        <button style="float:right; background-color:green" onclick="exportToPNG()">Exporter en PNG</button>
     </div>
 
     <script>
@@ -88,30 +89,23 @@
             }
         }
 
-        // Function to export the output to PNG
+        // Function to export the output to PNG using html2canvas
         function exportToPNG() {
             const output = document.getElementById("output");
-            const canvas = document.getElementById("canvas");
-            const context = canvas.getContext("2d");
 
-            // Set canvas size to match the output
-            canvas.width = output.offsetWidth;
-            canvas.height = output.offsetHeight;
-
-            // Use a white background for the canvas
-            context.fillStyle = "#ffffff";
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Draw the output text onto the canvas
-            context.font = "16px Arial";
-            context.fillStyle = "#000";
-            context.fillText(output.innerText, 10, 30);
-
-            // Export canvas to PNG
-            const link = document.createElement("a");
-            link.download = "output.png";
-            link.href = canvas.toDataURL("image/png");
-            link.click();
+            // Use html2canvas to capture the content of the output div
+            html2canvas(output, {
+                backgroundColor: "#ffffff",  // Ensure white background
+                scale: 2,  // Increase scale for better image quality
+            }).then(function(canvas) {
+                // Convert the canvas to a PNG and trigger the download
+                const link = document.createElement("a");
+                link.download = "output.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            }).catch(function(error) {
+                console.error('Error exporting to PNG:', error);
+            });
         }
 
         // Registering the Service Worker
