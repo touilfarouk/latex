@@ -71,7 +71,7 @@
         <div id="output" class="output"></div>
         <canvas id="canvas" style="display:none;"></canvas>
         <br>
-        <button style="float:right; background-color:green" onclick="exportToPNG()">Exporter en PNG</button>
+        <button style="float:right; background-color:green" onclick="exportToJPEG()">Exporter en JPEG</button>
     </div>
 
     <script>
@@ -99,16 +99,16 @@
             }
         }
 
-        // Function to export the output to PNG using html2canvas
-        function exportToPNG() {
+        // Function to export the output to JPEG using html2canvas
+        function exportToJPEG() {
             const output = document.getElementById("output");
 
             // Check if html2canvas is loaded
             if (typeof html2canvas === 'undefined') {
                 console.log('html2canvas is not defined, loading now...');
                 loadHtml2Canvas(function() {
-                    // Now that html2canvas is loaded, we can call exportToPNG again
-                    exportToPNG(); // Retry the export process
+                    // Now that html2canvas is loaded, we can call exportToJPEG again
+                    exportToJPEG(); // Retry the export process
                 });
                 return;
             }
@@ -121,13 +121,13 @@
                 useCORS: true,  // Allow cross-origin resource sharing if necessary
                 allowTaint: true, // Allow tainted canvas for better rendering
             }).then(function(canvas) {
-                // Convert the canvas to a PNG and trigger the download
+                // Convert the canvas to a JPEG and trigger the download
                 const link = document.createElement("a");
-                link.download = "output.png";
-                link.href = canvas.toDataURL("image/png");
+                link.download = "output.jpg";  // Set the file extension to .jpg
+                link.href = canvas.toDataURL("image/jpeg", 0.9);  // Use JPEG format with quality 0.9
                 link.click();
             }).catch(function(error) {
-                console.error('Error exporting to PNG:', error);
+                console.error('Error exporting to JPEG:', error);
             });
         }
 
