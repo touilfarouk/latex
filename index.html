@@ -97,6 +97,9 @@
             html2canvas(output, {
                 backgroundColor: "#ffffff",  // Ensure white background
                 scale: 2,  // Increase scale for better image quality
+                logging: true,  // Enable logging to see potential issues
+                useCORS: true,  // Allow cross-origin resource sharing if necessary
+                allowTaint: true, // Allow tainted canvas for better rendering
             }).then(function(canvas) {
                 // Convert the canvas to a PNG and trigger the download
                 const link = document.createElement("a");
