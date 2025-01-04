@@ -59,21 +59,20 @@
 <body>
     <div class="container">
         <h1>Application KaTeX تطبيق</h1>
-         <p>Copiez l'expression suivante pour la tester - انسخ التعبير التالي لاختبار</p>
-        
-
+        <p>Copiez l'expression suivante pour la tester - انسخ التعبير التالي لاختبار</p>
         <code>
             A= (3 + \sqrt{7})^2 \\<br>
             B= 5\sqrt{16} + 6\sqrt{7} - \sqrt{28} - 15
         </code>
         <textarea id="mathInput" placeholder="Exemple : A &= (3 + \\sqrt{7})^2"></textarea>
         <button onclick="renderMath()">Afficher</button>
-       
+        <button onclick="exportToPNG()">Exporter en PNG</button>
         <div id="output" class="output"></div>
+        <canvas id="canvas" style="display:none;"></canvas>
     </div>
 
     <script>
-        // Fonction pour afficher les mathématiques
+        // Function to render math
         function renderMath() {
             const input = document.getElementById("mathInput").value;
             const output = document.getElementById("output");
@@ -86,7 +85,33 @@
             }
         }
 
-        // Enregistrement du Service Worker
+        // Function to export the output to PNG
+        function exportToPNG() {
+            const output = document.getElementById("output");
+            const canvas = document.getElementById("canvas");
+            const context = canvas.getContext("2d");
+
+            // Set canvas size to match the output
+            canvas.width = output.offsetWidth;
+            canvas.height = output.offsetHeight;
+
+            // Use a white background for the canvas
+            context.fillStyle = "#ffffff";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the output text onto the canvas
+            context.font = "16px Arial";
+            context.fillStyle = "#000";
+            context.fillText(output.innerText, 10, 30);
+
+            // Export canvas to PNG
+            const link = document.createElement("a");
+            link.download = "output.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        }
+
+        // Registering the Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
                 .then(() => console.log('Service Worker enregistré'))
