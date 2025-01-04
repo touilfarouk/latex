@@ -6,7 +6,7 @@
     <meta name="description" content="PWA avec KaTeX pour afficher des expressions mathématiques">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icon.png">
-    <!-- Move this script tag before it's called -->
+    <!-- Make sure html2canvas is loaded correctly -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@0.4.2/dist/html2canvas.min.js"></script> <!-- Updated version -->
     <script src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" rel="stylesheet">
@@ -93,6 +93,13 @@
         // Function to export the output to PNG using html2canvas
         function exportToPNG() {
             const output = document.getElementById("output");
+
+            // Check if html2canvas is available
+            if (typeof html2canvas === 'undefined') {
+                console.error('html2canvas is not defined');
+                alert('html2canvas is not loaded correctly');
+                return;
+            }
 
             // Use html2canvas to capture the content of the output div
             html2canvas(output, {
