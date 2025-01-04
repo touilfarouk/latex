@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="تطبيق PWA مع KaTeX لعرض المعادلات الرياضية">
+    <meta name="description" content="PWA avec KaTeX pour afficher des expressions mathématiques">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icon.png">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" rel="stylesheet">
-    <title>تطبيق KaTeX</title>
+    <title>Application KaTeX</title>
     <style>
         body {
-            font-family: "Arial", sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
@@ -24,8 +24,7 @@
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            direction: rtl;
-            text-align: right;
+            text-align: left;
         }
         textarea {
             width: 100%;
@@ -59,11 +58,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>تطبيق KaTeX PWA</h1>
-        <p>أدخل تعبيراً رياضياً أدناه:</p>
-        <textarea id="mathInput" placeholder="مثال: A &= (3 + \\sqrt{7})^2"></textarea>
-        <button onclick="renderMath()">عرض التعبير</button>
-        <p>انسخ التعبير التالي لاختباره:</p>
+        <h1>Application KaTeX PWA</h1>
+        <p>Entrez une expression mathématique ci-dessous :</p>
+        <textarea id="mathInput" placeholder="Exemple : A &= (3 + \\sqrt{7})^2"></textarea>
+        <button onclick="renderMath()">Afficher</button>
+        <p>Copiez l'expression suivante pour la tester :</p>
         <code>
             A= (3 + \sqrt{7})^2 \\<br>
             B= 5\sqrt{16} + 6\sqrt{7} - \sqrt{28} - 15
@@ -72,7 +71,7 @@
     </div>
 
     <script>
-        // Render Math Function
+        // Fonction pour afficher les mathématiques
         function renderMath() {
             const input = document.getElementById("mathInput").value;
             const output = document.getElementById("output");
@@ -81,15 +80,15 @@
                     throwOnError: false,
                 });
             } catch (err) {
-                output.innerHTML = `<span style="color: red;">خطأ: ${err.message}</span>`;
+                output.innerHTML = `<span style="color: red;">Erreur : ${err.message}</span>`;
             }
         }
 
-        // Register Service Worker
+        // Enregistrement du Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
-                .then(() => console.log('تم تسجيل Service Worker'))
-                .catch(err => console.error('فشل تسجيل Service Worker:', err));
+                .then(() => console.log('Service Worker enregistré'))
+                .catch(err => console.error('Échec de l\'enregistrement du Service Worker :', err));
         }
     </script>
 </body>
