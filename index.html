@@ -83,6 +83,17 @@
     </div>
 
     <script>
+        // Function to clean the URL by removing the `fbclid` parameter
+        function cleanURL() {
+            if (window.location.href.includes("fbclid=")) {
+                const cleanUrl = window.location.href.split("?fbclid=")[0];
+                window.history.replaceState({}, document.title, cleanUrl);
+            }
+        }
+
+        // Clean the URL when the page loads
+        cleanURL();
+
         // Function to render math
         function renderMath() {
             const input = document.getElementById("mathInput").value;
