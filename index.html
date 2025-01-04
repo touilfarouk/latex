@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PWA avec KaTeX pour afficher des expressions mathématiques">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="icon.png"> <!-- Ensure this points to the correct path -->
+    <link rel="icon" href="icon.png">
+    <!-- Move this script tag before it's called -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@0.4.2/dist/html2canvas.min.js"></script> <!-- Updated version -->
     <script src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@0.4.1/dist/html2canvas.min.js"></script> <!-- Correct placement of the script -->
     <title>Application KaTeX</title>
     <style>
         body {
