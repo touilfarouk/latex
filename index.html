@@ -8,6 +8,7 @@
     <link rel="icon" href="icon.png">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <title>Application KaTeX</title>
     <style>
         body {
@@ -71,7 +72,7 @@
         <div id="output" class="output"></div>
         <canvas id="canvas" style="display:none;"></canvas>
         <br>
-        <button style="float:right; background-color:green" onclick="exportToJPEG()">Exporter en JPEG</button>
+        <button style="float:right; background-color:green" onclick="exportToPDF()">Exporter en PDF</button>
     </div>
 
     <script>
@@ -99,16 +100,16 @@
             }
         }
 
-        // Function to export the output to JPEG using html2canvas
-        function exportToJPEG() {
+        // Function to export the output to PDF using jsPDF
+        function exportToPDF() {
             const output = document.getElementById("output");
 
             // Check if html2canvas is loaded
             if (typeof html2canvas === 'undefined') {
                 console.log('html2canvas is not defined, loading now...');
                 loadHtml2Canvas(function() {
-                    // Now that html2canvas is loaded, we can call exportToJPEG again
-                    exportToJPEG(); // Retry the export process
+                    // Now that html2canvas is loaded, we can call exportToPDF again
+                    exportToPDF(); // Retry the export process
                 });
                 return;
             }
@@ -121,13 +122,15 @@
                 useCORS: true,  // Allow cross-origin resource sharing if necessary
                 allowTaint: true, // Allow tainted canvas for better rendering
             }).then(function(canvas) {
-                // Convert the canvas to a JPEG and trigger the download
-                const link = document.createElement("a");
-                link.download = "output.jpg";  // Set the file extension to .jpg
-                link.href = canvas.toDataURL("image/jpeg", 0.9);  // Use JPEG format with quality 0.9
-                link.click();
+                // Create a new jsPDF instance
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Add the captured image to the PDF
+                doc.addImage(canvas.toDataURL("image/jpeg"), 'JPEG', 10, 10, 180, 160);
+                doc.save('output.pdf');  // Save the PDF with the name 'output.pdf'
             }).catch(function(error) {
-                console.error('Error exporting to JPEG:', error);
+                console.error('Error exporting to PDF:', error);
             });
         }
 
