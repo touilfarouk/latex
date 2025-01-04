@@ -6,8 +6,6 @@
     <meta name="description" content="PWA avec KaTeX pour afficher des expressions mathématiques">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icon.png">
-    <!-- Make sure html2canvas is loaded correctly -->
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@0.4.2/dist/html2canvas.min.js"></script> <!-- Updated version -->
     <script src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" rel="stylesheet">
     <title>Application KaTeX</title>
@@ -77,6 +75,17 @@
     </div>
 
     <script>
+        // Dynamically load html2canvas to ensure it is loaded before use
+        function loadHtml2Canvas(callback) {
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@0.4.2/dist/html2canvas.min.js';
+            script.onload = callback;  // Once loaded, execute the callback
+            script.onerror = function() {
+                console.error('Failed to load html2canvas');
+            };
+            document.head.appendChild(script);
+        }
+
         // Function to render math
         function renderMath() {
             const input = document.getElementById("mathInput").value;
@@ -94,10 +103,13 @@
         function exportToPNG() {
             const output = document.getElementById("output");
 
-            // Check if html2canvas is available
+            // Check if html2canvas is loaded
             if (typeof html2canvas === 'undefined') {
-                console.error('html2canvas is not defined');
-                alert('html2canvas is not loaded correctly');
+                console.log('html2canvas is not defined, loading now...');
+                loadHtml2Canvas(function() {
+                    // Now that html2canvas is loaded, we can call exportToPNG again
+                    exportToPNG(); // Retry the export process
+                });
                 return;
             }
 
