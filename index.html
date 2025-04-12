@@ -120,7 +120,7 @@
     </div>
 </div>
 
-        <button onclick="renderMath()">Afficher</button>
+     
        
         <div id="output" class="output"></div>
         
@@ -232,7 +232,11 @@
         textarea.setSelectionRange(newCursorPos, newCursorPos);
     }
 }
+// Ajout du rendu auto dès saisie
+document.getElementById("mathInput").addEventListener("input", renderMath);
 
+// Rendu auto dès le chargement de la page
+window.addEventListener("DOMContentLoaded", renderMath);
     </script>
 </body>
 </html>
