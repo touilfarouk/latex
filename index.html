@@ -1,103 +1,120 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PWA avec KaTeX pour afficher des expressions mathématiques">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="icon.png">
-    <script src="katex.min.js"></script>
-    <link href="katex.min.css" rel="stylesheet">
-    <script src="jspdf.umd.min.js"></script>
-    <script src="html2canvas.min.js"></script>
-    <title>Application KaTeX</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            background-color: #f5f5f5;
-        }
-        .container {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: left;
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-        .output {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px dashed #ccc;
-            min-height: 50px;
-            background: #fafafa;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .export-buttons {
-            margin-top: 20px;
-        }
-        .math-keyboard {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-.math-keyboard .row {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.math-keyboard button {
-    padding: 10px;
-    font-size: 18px;
-    border: none;
-    background-color: #e0e0e0;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-.math-keyboard button:hover {
-    background-color: #d0d0d0;
-}
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PWA avec KaTeX pour afficher des expressions mathématiques" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.png" />
+  <script src="katex.min.js"></script>
+  <link href="katex.min.css" rel="stylesheet" />
+  <script src="jspdf.umd.min.js"></script>
+  <script src="html2canvas.min.js"></script>
+  <title>Application KaTeX</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: var(--background, #f5f5f5);
+      color: var(--text, #000);
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        --background: #1e1e1e;
+        --text: #f5f5f5;
+      }
+      .container {
+        background-color: #2a2a2a;
+        color: #f5f5f5;
+      }
+      .output {
+        background-color: #1e1e1e;
+        border-color: #555;
+      }
+    }
+    .container {
+      margin: 20px auto;
+      max-width: 600px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+    textarea {
+      display: none;
+    }
+    .output {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px dashed #ccc;
+      min-height: 50px;
+      background: #fafafa;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .export-buttons {
+      margin-top: 20px;
+    }
+    .math-keyboard {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .math-keyboard .row {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .math-keyboard button {
+      padding: 10px;
+      font-size: 18px;
+      background-color: #e0e0e0;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    .math-keyboard button:hover {
+      background-color: #d0d0d0;
+    }
+    iframe {
+      margin-top: 20px;
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Application KaTeX تطبيق</h1>
-        <p>Copiez l'expression suivante pour la tester - انسخ التعبير التالي لاختبار</p>
-        <code>
-            A= (3 + \sqrt{7})^2 \\<br>
-            B= 5\sqrt{16} + 6\sqrt{7} - \sqrt{28} - 15
-        </code>
-        <br>
-        <textarea id="mathInput" placeholder="Exemple : A &= (3 + \\sqrt{7})^2"></textarea>
-        <div class="math-keyboard">
-    <div class="row">
+  <div class="container">
+    <h1>Application KaTeX تطبيق</h1>
+    <p>Copiez l'expression suivante pour la tester - انسخ التعبير التالي لاختبار</p>
+    <code>
+      A= (3 + \sqrt{7})^2 \\<br />
+      B= 5\sqrt{16} + 6\sqrt{7} - \sqrt{28} - 15
+    </code>
+
+    <textarea id="mathInput">A = (3 + \sqrt{7})^2</textarea>
+
+    <div class="math-keyboard">
+      <div class="row">
         <button onclick="insertLatex('\\sqrt{}')">√</button>
         <button onclick="insertLatex('^{}')">xʸ</button>
         <button onclick="insertLatex('_{}')">xᵧ</button>
@@ -107,8 +124,8 @@
         <button onclick="insertLatex('-')">−</button>
         <button onclick="insertLatex('\\cdot')">×</button>
         <button onclick="insertLatex('\\div')">÷</button>
-    </div>
-    <div class="row">
+      </div>
+      <div class="row">
         <button onclick="insertLatex('\\pi')">π</button>
         <button onclick="insertLatex('\\theta')">θ</button>
         <button onclick="insertLatex('\\alpha')">α</button>
@@ -117,126 +134,113 @@
         <button onclick="insertLatex('\\int_{}^{}')">∫</button>
         <button onclick="insertLatex('\\infty')">∞</button>
         <button onclick="insertLatex('\\approx')">≈</button>
+      </div>
+      <div class="row">
+        <button onclick="insertLatex('(')">(</button>
+        <button onclick="insertLatex(')')">)</button>
+        <button onclick="insertLatex('[')">[</button>
+        <button onclick="insertLatex(']')">]</button>
+        <button onclick="insertLatex('{')">{</button>
+        <button onclick="insertLatex('}')">}</button>
+        <button onclick="insertLatex('|')">|</button>
+        <button onclick="insertLatex('||')">||</button>
+        <button onclick="insertLatex('\\left')">left</button>
+        <button onclick="insertLatex('\\right')">right</button>
+      </div>
+      <div class="row">
+        <button onclick="insertLatex(' ')">Espace</button>
+        <button onclick="removeLast()">←</button>
+        <button onclick="clearInput()">Effacer</button>
+      </div>
     </div>
-</div>
 
-     
-       
-        <div id="output" class="output"></div>
-        
-        <div class="export-buttons">
-            <button onclick="exportToPNG()">Exporter en PNG</button>
-            <button onclick="exportToJPEG()">Exporter en JPEG</button>
-            <button onclick="exportToPDF()">Exporter en PDF</button>
-        </div>
+    <div id="output" class="output"></div>
+
+    <div class="export-buttons">
+      <button onclick="exportToPNG()">Exporter PNG</button>
+      <button onclick="exportToPDF(true)">Exporter PDF</button>
     </div>
 
-    <script>
-        // Function to clean the URL by removing the `fbclid` parameter
-        function cleanURL() {
-            if (window.location.href.includes("fbclid=")) {
-                const cleanUrl = window.location.href.split("?fbclid=")[0];
-                window.history.replaceState({}, document.title, cleanUrl);
-            }
-        }
+    <iframe id="pdfPreview" title="Aperçu PDF"></iframe>
+  </div>
 
-        // Clean the URL when the page loads
-        cleanURL();
-
-        // Function to render math
-        function renderMath() {
-            const input = document.getElementById("mathInput").value;
-            const output = document.getElementById("output");
-            try {
-                output.innerHTML = katex.renderToString(input, {
-                    throwOnError: false,
-                });
-            } catch (err) {
-                output.innerHTML = `<span style="color: red;">Erreur : ${err.message}</span>`;
-            }
-        }
-
-        // Function to export the output as PNG
-        function exportToPNG() {
-            const output = document.getElementById("output");
-            html2canvas(output, { 
-                backgroundColor: "#ffffff",
-                scale: 2 
-            }).then(function(canvas) {
-                const img = canvas.toDataURL("image/png");
-                const link = document.createElement('a');
-                link.href = img;
-                link.download = 'output.png';
-                link.click();
-            }).catch(function(error) {
-                console.error('Error exporting to PNG:', error);
-            });
-        }
-
-        // Function to export the output as JPEG
-        function exportToJPEG() {
-            const output = document.getElementById("output");
-            html2canvas(output, { 
-                backgroundColor: "#ffffff",
-                scale: 2 
-            }).then(function(canvas) {
-                const img = canvas.toDataURL("image/jpeg");
-                const link = document.createElement('a');
-                link.href = img;
-                link.download = 'output.jpg';
-                link.click();
-            }).catch(function(error) {
-                console.error('Error exporting to JPEG:', error);
-            });
-        }
-
-        // Function to export the output as PDF
-        function exportToPDF() {
-            const output = document.getElementById("output");
-            html2canvas(output, { 
-                backgroundColor: "#ffffff",
-                scale: 2 
-            }).then(function(canvas) {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                doc.addImage(canvas.toDataURL("image/jpeg"), 'JPEG', 10, 10, 180, 160);
-                doc.save('output.pdf');
-            }).catch(function(error) {
-                console.error('Error exporting to PDF:', error);
-            });
-        }
-
-        // Registering the Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-                .then(() => console.log('Service Worker enregistré'))
-                .catch(err => console.error('Échec de l\'enregistrement du Service Worker :', err));
-        }
-
-        function insertLatex(latex) {
-    const textarea = document.getElementById("mathInput");
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const text = textarea.value;
-
-    textarea.value = text.slice(0, start) + latex + text.slice(end);
-
-    const cursorOffset = latex.indexOf('{}');
-    if (cursorOffset !== -1) {
-        const newCursorPos = start + cursorOffset + 1;
-        textarea.focus();
-        textarea.setSelectionRange(newCursorPos, newCursorPos);
-    } else {
-        const newCursorPos = start + latex.length;
-        textarea.focus();
-        textarea.setSelectionRange(newCursorPos, newCursorPos);
+  <script>
+    function renderMath() {
+      const input = document.getElementById("mathInput").value;
+      const output = document.getElementById("output");
+      try {
+        output.innerHTML = katex.renderToString(input, {
+          throwOnError: false,
+        });
+      } catch (err) {
+        output.innerHTML = `<span style="color: red;">Erreur : ${err.message}</span>`;
+      }
     }
-}
-// Ajout du rendu auto dès saisie
-document.getElementById("mathInput").addEventListener("input", renderMath);
 
-// Rendu auto dès le chargement de la page
-window.addEventListener("DOMContentLoaded", renderMath);
-    </script>
+    function insertLatex(latex) {
+      const textarea = document.getElementById("mathInput");
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const text = textarea.value;
+
+      textarea.value = text.slice(0, start) + latex + text.slice(end);
+
+      const cursorOffset = latex.indexOf("{}");
+      const newCursorPos = cursorOffset !== -1 ? start + cursorOffset + 1 : start + latex.length;
+      textarea.setSelectionRange(newCursorPos, newCursorPos);
+      textarea.dispatchEvent(new Event("input"));
+    }
+
+    function removeLast() {
+      const textarea = document.getElementById("mathInput");
+      textarea.value = textarea.value.slice(0, -1);
+      textarea.dispatchEvent(new Event("input"));
+    }
+
+    function clearInput() {
+      document.getElementById("mathInput").value = "";
+      renderMath();
+    }
+
+    function exportToPNG() {
+      html2canvas(document.getElementById("output"), {
+        backgroundColor: "#ffffff",
+        scale: 2
+      }).then(canvas => {
+        const img = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = img;
+        link.download = "output.png";
+        link.click();
+      });
+    }
+
+    async function exportToPDF(showPreview = false) {
+      const { jsPDF } = window.jspdf;
+      const canvas = await html2canvas(document.getElementById("output"), {
+        backgroundColor: "#ffffff",
+        scale: 2
+      });
+      const imgData = canvas.toDataURL("image/jpeg");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "JPEG", 10, 10, 180, 160);
+      const blob = pdf.output("blob");
+
+      if (showPreview) {
+        const url = URL.createObjectURL(blob);
+        document.getElementById("pdfPreview").src = url;
+      } else {
+        pdf.save("output.pdf");
+      }
+    }
+
+    // Auto render on input
+    document.getElementById("mathInput").addEventListener("input", renderMath);
+    window.addEventListener("DOMContentLoaded", renderMath);
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js").catch(console.error);
+    }
+  </script>
 </body>
 </html>
