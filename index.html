@@ -100,30 +100,6 @@
       height: 500px;
       border: 1px solid #ccc;
     }
-
-    .output {
-      margin: 20px 0;
-      padding: 20px;
-      border: 1px dashed #ccc;
-      min-height: 50px;
-      background: #fafafa;
-      order: 1; /* New order */
-    }
-    .math-keyboard {
-      margin: 20px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      order: 2; /* New order */
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-    }
-    .math-keyboard button.letter {
-      font-size: 14px;
-      padding: 8px;
-    }
   </style>
 </head>
 <body>
@@ -136,65 +112,8 @@
     </code>
 
     <textarea id="mathInput">A = (3 + \sqrt{7})^2</textarea>
-    
-    <div id="output" class="output"></div>
 
     <div class="math-keyboard">
-      <!-- Numbers Row -->
-      <div class="row">
-        <button class="letter" onclick="insertLatex('0')">0</button>
-        <button class="letter" onclick="insertLatex('1')">1</button>
-        <button class="letter" onclick="insertLatex('2')">2</button>
-        <button class="letter" onclick="insertLatex('3')">3</button>
-        <button class="letter" onclick="insertLatex('4')">4</button>
-        <button class="letter" onclick="insertLatex('5')">5</button>
-        <button class="letter" onclick="insertLatex('6')">6</button>
-        <button class="letter" onclick="insertLatex('7')">7</button>
-        <button class="letter" onclick="insertLatex('8')">8</button>
-        <button class="letter" onclick="insertLatex('9')">9</button>
-      </div>
-
-      <!-- Letters Row 1 -->
-      <div class="row">
-        <button class="letter" onclick="insertLatex('A')">A</button>
-        <button class="letter" onclick="insertLatex('B')">B</button>
-        <button class="letter" onclick="insertLatex('C')">C</button>
-        <button class="letter" onclick="insertLatex('D')">D</button>
-        <button class="letter" onclick="insertLatex('E')">E</button>
-        <button class="letter" onclick="insertLatex('F')">F</button>
-        <button class="letter" onclick="insertLatex('G')">G</button>
-      </div>
-
-      <!-- Letters Row 2 -->
-      <div class="row">
-        <button class="letter" onclick="insertLatex('H')">H</button>
-        <button class="letter" onclick="insertLatex('I')">I</button>
-        <button class="letter" onclick="insertLatex('J')">J</button>
-        <button class="letter" onclick="insertLatex('K')">K</button>
-        <button class="letter" onclick="insertLatex('L')">L</button>
-        <button class="letter" onclick="insertLatex('M')">M</button>
-      </div>
-
-      <!-- Letters Row 3 -->
-      <div class="row">
-        <button class="letter" onclick="insertLatex('N')">N</button>
-        <button class="letter" onclick="insertLatex('O')">O</button>
-        <button class="letter" onclick="insertLatex('P')">P</button>
-        <button class="letter" onclick="insertLatex('Q')">Q</button>
-        <button class="letter" onclick="insertLatex('R')">R</button>
-        <button class="letter" onclick="insertLatex('S')">S</button>
-      </div>
-
-      <!-- Letters Row 4 -->
-      <div class="row">
-        <button class="letter" onclick="insertLatex('T')">T</button>
-        <button class="letter" onclick="insertLatex('U')">U</button>
-        <button class="letter" onclick="insertLatex('V')">V</button>
-        <button class="letter" onclick="insertLatex('W')">W</button>
-        <button class="letter" onclick="insertLatex('X')">X</button>
-        <button class="letter" onclick="insertLatex('Y')">Y</button>
-        <button class="letter" onclick="insertLatex('Z')">Z</button>
-      </div
       <div class="row">
         <button onclick="insertLatex('\\sqrt{}')">√</button>
         <button onclick="insertLatex('^{}')">xʸ</button>
