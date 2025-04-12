@@ -59,6 +59,31 @@
         .export-buttons {
             margin-top: 20px;
         }
+        .math-keyboard {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.math-keyboard .row {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.math-keyboard button {
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.math-keyboard button:hover {
+    background-color: #d0d0d0;
+}
+
     </style>
 </head>
 <body>
@@ -71,6 +96,30 @@
         </code>
         <br>
         <textarea id="mathInput" placeholder="Exemple : A &= (3 + \\sqrt{7})^2"></textarea>
+        <div class="math-keyboard">
+    <div class="row">
+        <button onclick="insertLatex('\\sqrt{}')">√</button>
+        <button onclick="insertLatex('^{}')">xʸ</button>
+        <button onclick="insertLatex('_{}')">xᵧ</button>
+        <button onclick="insertLatex('\\frac{}{}')">a⁄b</button>
+        <button onclick="insertLatex('=')">=</button>
+        <button onclick="insertLatex('+')">+</button>
+        <button onclick="insertLatex('-')">−</button>
+        <button onclick="insertLatex('\\cdot')">×</button>
+        <button onclick="insertLatex('\\div')">÷</button>
+    </div>
+    <div class="row">
+        <button onclick="insertLatex('\\pi')">π</button>
+        <button onclick="insertLatex('\\theta')">θ</button>
+        <button onclick="insertLatex('\\alpha')">α</button>
+        <button onclick="insertLatex('\\beta')">β</button>
+        <button onclick="insertLatex('\\sum_{}^{}')">∑</button>
+        <button onclick="insertLatex('\\int_{}^{}')">∫</button>
+        <button onclick="insertLatex('\\infty')">∞</button>
+        <button onclick="insertLatex('\\approx')">≈</button>
+    </div>
+</div>
+
         <button onclick="renderMath()">Afficher</button>
        
         <div id="output" class="output"></div>
@@ -163,6 +212,27 @@
                 .then(() => console.log('Service Worker enregistré'))
                 .catch(err => console.error('Échec de l\'enregistrement du Service Worker :', err));
         }
+
+        function insertLatex(latex) {
+    const textarea = document.getElementById("mathInput");
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    textarea.value = text.slice(0, start) + latex + text.slice(end);
+
+    const cursorOffset = latex.indexOf('{}');
+    if (cursorOffset !== -1) {
+        const newCursorPos = start + cursorOffset + 1;
+        textarea.focus();
+        textarea.setSelectionRange(newCursorPos, newCursorPos);
+    } else {
+        const newCursorPos = start + latex.length;
+        textarea.focus();
+        textarea.setSelectionRange(newCursorPos, newCursorPos);
+    }
+}
+
     </script>
 </body>
 </html>
