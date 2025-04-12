@@ -148,6 +148,15 @@
         <button onclick="insertLatex('\\right')">right</button>
       </div>
       <div class="row">
+  <!-- Letters A–Z -->
+  ${"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l => `<button onclick="insertLatex('${l}')">${l}</button>`).join("")}
+</div>
+<div class="row">
+  <!-- Numbers 0–9 -->
+  ${"0123456789".split("").map(n => `<button onclick="insertLatex('${n}')">${n}</button>`).join("")}
+</div>
+
+      <div class="row">
         <button onclick="insertLatex(' ')">Espace</button>
         <button onclick="removeLast()">←</button>
         <button onclick="clearInput()">Effacer</button>
