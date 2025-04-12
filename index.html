@@ -196,7 +196,7 @@
 
     <div class="export-buttons">
       <button onclick="exportToPNG()">Exporter PNG</button>
-      <button onclick="exportToPDF(true)">Exporter PDF</button>
+      
     </div>
 
     <iframe id="pdfPreview" title="Aperçu PDF"></iframe>
@@ -253,24 +253,7 @@
       });
     }
 
-    async function exportToPDF(showPreview = false) {
-      const { jsPDF } = window.jspdf;
-      const canvas = await html2canvas(document.getElementById("output"), {
-        backgroundColor: "#ffffff",
-        scale: 2
-      });
-      const imgData = canvas.toDataURL("image/jpeg");
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, "JPEG", 10, 10, 180, 160);
-      const blob = pdf.output("blob");
 
-      if (showPreview) {
-        const url = URL.createObjectURL(blob);
-        document.getElementById("pdfPreview").src = url;
-      } else {
-        pdf.save("output.pdf");
-      }
-    }
 
     // Auto render on input
     document.getElementById("mathInput").addEventListener("input", renderMath);
