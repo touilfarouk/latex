@@ -100,6 +100,43 @@
       height: 500px;
       border: 1px solid #ccc;
     }
+    .math-keyboard {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.math-keyboard .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.math-keyboard button {
+  flex: 1 0 18%; /* Adapt size per row, around 5-6 buttons per row */
+  min-width: 48px;
+  max-width: 100px;
+  font-size: 16px;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .math-keyboard button {
+    flex: 1 0 22%; /* More buttons per row on small screen */
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
   </style>
 </head>
 <body>
