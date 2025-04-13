@@ -124,13 +124,33 @@
   justify-content: center;
 }
 
+/* New styles for floating elements */
+.numbers-container {
+  float: right;
+  width: 40%;
+}
 
+.controls-container {
+  float: left;
+  width: 55%;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 @media screen and (max-width: 600px) {
   .math-keyboard button {
     flex: 1 0 22%; /* More buttons per row on small screen */
     font-size: 14px;
     padding: 8px;
+  }
+  .numbers-container,
+  .controls-container {
+    float: none;
+    width: 100%;
   }
 }
 
@@ -155,16 +175,6 @@
         <button onclick="insertLatex('\\cdot')">×</button>
         <button onclick="insertLatex('\\div')">÷</button>
       </div>
-    <!--  <div class="row">
-        <button onclick="insertLatex('\\pi')">π</button>
-        <button onclick="insertLatex('\\theta')">θ</button>
-        <button onclick="insertLatex('\\alpha')">α</button>
-        <button onclick="insertLatex('\\beta')">β</button>
-        <button onclick="insertLatex('\\sum_{}^{}')">∑</button>
-        <button onclick="insertLatex('\\int_{}^{}')">∫</button>
-        <button onclick="insertLatex('\\infty')">∞</button>
-        <button onclick="insertLatex('\\approx')">≈</button>
-      </div>-->
       <div class="row">
         <button onclick="insertLatex('(')">(</button>
         <button onclick="insertLatex(')')">)</button>
@@ -178,64 +188,70 @@
         <button onclick="insertLatex('\\right')">→</button>
       </div>
       <div class="row">
-  <button onclick="insertLatex('A')">A</button>
-  <button onclick="insertLatex('B')">B</button>
-  <button onclick="insertLatex('C')">C</button>
-  <button onclick="insertLatex('D')">D</button>
-  <button onclick="insertLatex('E')">E</button>
-  <button onclick="insertLatex('F')">F</button>
-  <button onclick="insertLatex('G')">G</button>
-  <button onclick="insertLatex('H')">H</button>
-  <button onclick="insertLatex('I')">I</button>
-  <button onclick="insertLatex('J')">J</button>
-  <button onclick="insertLatex('K')">K</button>
-  <button onclick="insertLatex('L')">L</button>
-  <button onclick="insertLatex('M')">M</button>
-  <button onclick="insertLatex('N')">N</button>
-  <button onclick="insertLatex('O')">O</button>
-  <button onclick="insertLatex('P')">P</button>
-  <button onclick="insertLatex('Q')">Q</button>
-  <button onclick="insertLatex('R')">R</button>
-  <button onclick="insertLatex('S')">S</button>
-  <button onclick="insertLatex('T')">T</button>
-  <button onclick="insertLatex('U')">U</button>
-  <button onclick="insertLatex('V')">V</button>
-  <button onclick="insertLatex('W')">W</button>
-  <button onclick="insertLatex('X')">X</button>
-  <button onclick="insertLatex('Y')">Y</button>
-  <button onclick="insertLatex('Z')">Z</button>
-</div>
-<div class="row">
-  <button onclick="insertLatex('0')">0</button>
-  <button onclick="insertLatex('1')">1</button>
-  <button onclick="insertLatex('2')">2</button>
-  <button onclick="insertLatex('3')">3</button>
-  <button onclick="insertLatex('4')">4</button>
-  <button onclick="insertLatex('5')">5</button>
-  <button onclick="insertLatex('6')">6</button>
-  <button onclick="insertLatex('7')">7</button>
-  <button onclick="insertLatex('8')">8</button>
-  <button onclick="insertLatex('9')">9</button>
-</div>
-
-
-<div class="row">
- 
-<button onclick="removeLast()">←</button>
-<button onclick="clearInput()">Effacer</button>
-<button onclick="insertLatex(' ')">Espace</button>
-<button onclick="insertLatex(' \\\\ ')">↵ Entrée</button>
-</div>
+        <button onclick="insertLatex('A')">A</button>
+        <button onclick="insertLatex('B')">B</button>
+        <button onclick="insertLatex('C')">C</button>
+        <button onclick="insertLatex('D')">D</button>
+        <button onclick="insertLatex('E')">E</button>
+        <button onclick="insertLatex('F')">F</button>
+        <button onclick="insertLatex('G')">G</button>
+        <button onclick="insertLatex('H')">H</button>
+        <button onclick="insertLatex('I')">I</button>
+        <button onclick="insertLatex('J')">J</button>
+        <button onclick="insertLatex('K')">K</button>
+        <button onclick="insertLatex('L')">L</button>
+        <button onclick="insertLatex('M')">M</button>
+        <button onclick="insertLatex('N')">N</button>
+        <button onclick="insertLatex('O')">O</button>
+        <button onclick="insertLatex('P')">P</button>
+        <button onclick="insertLatex('Q')">Q</button>
+        <button onclick="insertLatex('R')">R</button>
+        <button onclick="insertLatex('S')">S</button>
+        <button onclick="insertLatex('T')">T</button>
+        <button onclick="insertLatex('U')">U</button>
+        <button onclick="insertLatex('V')">V</button>
+        <button onclick="insertLatex('W')">W</button>
+        <button onclick="insertLatex('X')">X</button>
+        <button onclick="insertLatex('Y')">Y</button>
+        <button onclick="insertLatex('Z')">Z</button>
+      </div>
+      
+      <div class="clearfix">
+        <div class="numbers-container">
+          <div class="row">
+            <button onclick="insertLatex('1')">1</button>
+            <button onclick="insertLatex('2')">2</button>
+            <button onclick="insertLatex('3')">3</button>
+          </div>
+          <div class="row">
+            <button onclick="insertLatex('4')">4</button>
+            <button onclick="insertLatex('5')">5</button>
+            <button onclick="insertLatex('6')">6</button>
+          </div>
+          <div class="row">
+            <button onclick="insertLatex('7')">7</button>
+            <button onclick="insertLatex('8')">8</button>
+            <button onclick="insertLatex('9')">9</button>
+          </div>
+          <div class="row">
+            <button onclick="insertLatex('0')">0</button>
+          </div>
+        </div>
+        
+        <div class="controls-container">
+          <div class="row">
+            <button onclick="removeLast()">←</button>
+            <button onclick="clearInput()">Effacer</button>
+            <button onclick="insertLatex(' ')">Espace</button>
+            <button onclick="insertLatex(' \\\\ ')">↵ Entrée</button>
+          </div>
+        </div>
+      </div>
     </div>
-
-   
 
     <div class="export-buttons">
       <button onclick="exportToPNG()">Exporter comme Image</button>
-      
     </div>
-
-   
   </div>
 
   <script>
@@ -288,8 +304,6 @@
         link.click();
       });
     }
-
-
 
     // Auto render on input
     document.getElementById("mathInput").addEventListener("input", renderMath);
