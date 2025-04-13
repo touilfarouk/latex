@@ -174,8 +174,8 @@
         <button onclick="insertLatex('}')">}</button>
         <button onclick="insertLatex('|')">|</button>
         <button onclick="insertLatex('||')">||</button>
-        <button onclick="insertLatex('\\left')">left</button>
-        <button onclick="insertLatex('\\right')">right</button>
+        <button onclick="insertLatex('\\left')">←</button>
+        <button onclick="insertLatex('\\right')">→</button>
       </div>
       <div class="row">
   <button onclick="insertLatex('A')">A</button>
@@ -220,10 +220,11 @@
 
 
 <div class="row">
-  <button onclick="insertLatex(' ')">Espace</button>
-  <button onclick="insertLatex(' \\\\ ')">↵ Entrée</button>
-  <button onclick="removeLast()">←</button>
-  <button onclick="clearInput()">Effacer</button>
+ 
+<button onclick="removeLast()">←</button>
+<button onclick="clearInput()">Effacer</button>
+<button onclick="insertLatex(' ')">Espace</button>
+<button onclick="insertLatex(' \\\\ ')">↵ Entrée</button>
 </div>
     </div>
 
