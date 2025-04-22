@@ -154,6 +154,46 @@
   }
 }
 
+/* Section-specific button styles */
+.operators button {
+  background-color: #8e44ad; /* Purple */
+}
+.brackets button {
+  background-color: #3498db; /* Blue */
+}
+.letters button {
+  background-color: #27ae60; /* Green */
+}
+.numbers button {
+  background-color: #e67e22; /* Orange */
+}
+.controls button {
+  background-color: #c0392b; /* Red */
+}
+.export-buttons button {
+  background-color: #16a085; /* Teal */
+}
+
+/* Hover effects */
+.operators button:hover {
+  background-color: #9b59b6;
+}
+.brackets button:hover {
+  background-color: #5dade2;
+}
+.letters button:hover {
+  background-color: #2ecc71;
+}
+.numbers button:hover {
+  background-color: #f39c12;
+}
+.controls button:hover {
+  background-color: #e74c3c;
+}
+.export-buttons button:hover {
+  background-color: #1abc9c;
+}
+
   </style>
 </head>
 <body>
@@ -164,7 +204,7 @@
     <textarea id="mathInput"></textarea>
 
     <div class="math-keyboard">
-      <div class="row">
+      <div class="row operators">
         <button onclick="insertLatex('\\sqrt{}')">√</button>
         <button onclick="insertLatex('^{}')">xʸ</button>
         <button onclick="insertLatex('_{}')">xᵧ</button>
@@ -175,7 +215,7 @@
         <button onclick="insertLatex('\\cdot')">×</button>
         <button onclick="insertLatex('\\div')">÷</button>
       </div>
-      <div class="row">
+      <div class="row brackets">
         <button onclick="insertLatex('(')">(</button>
         <button onclick="insertLatex(')')">)</button>
         <button onclick="insertLatex('[')">[</button>
@@ -187,7 +227,7 @@
         <button onclick="insertLatex('\\left')">←</button>
         <button onclick="insertLatex('\\right')">→</button>
       </div>
-      <div class="row">
+      <div class="row letters">
         <button onclick="insertLatex('A')">A</button>
         <button onclick="insertLatex('B')">B</button>
         <button onclick="insertLatex('C')">C</button>
@@ -218,12 +258,12 @@
       
       <div class="clearfix">
         <div class="numbers-container">
-          <div class="row">
+          <div class="row numbers">
             <button onclick="insertLatex('1')">1</button>
             <button onclick="insertLatex('2')">2</button>
             <button onclick="insertLatex('3')">3</button>
           </div>
-          <div class="row">
+          <div class="row controls">
             <button onclick="insertLatex('4')">4</button>
             <button onclick="insertLatex('5')">5</button>
             <button onclick="insertLatex('6')">6</button>
